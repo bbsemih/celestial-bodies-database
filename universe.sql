@@ -203,7 +203,8 @@ CREATE TABLE public.star (
     weight numeric(5,1),
     age integer,
     alive boolean NOT NULL,
-    description text
+    description text,
+    galaxy_id integer
 );
 
 
@@ -335,12 +336,12 @@ INSERT INTO public.planet VALUES (12, 'planetryw sbsr1', 5.0, 41, false, 'pljgm 
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.star VALUES (1, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon is');
-INSERT INTO public.star VALUES (2, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon s');
-INSERT INTO public.star VALUES (3, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon o');
-INSERT INTO public.star VALUES (4, 'staryw sbsr1', NULL, NULL, false, 'starymon ovd');
-INSERT INTO public.star VALUES (5, 'staryw sbsr1', NULL, NULL, false, 'starrymon ovd');
-INSERT INTO public.star VALUES (6, 'staryw sbsr1', NULL, NULL, false, 'starrymon vd');
+INSERT INTO public.star VALUES (1, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon is', NULL);
+INSERT INTO public.star VALUES (2, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon s', NULL);
+INSERT INTO public.star VALUES (3, 'mopn ssr1', 6.0, 27, false, 'rpwe rove mon o', NULL);
+INSERT INTO public.star VALUES (4, 'staryw sbsr1', NULL, NULL, false, 'starymon ovd', NULL);
+INSERT INTO public.star VALUES (5, 'staryw sbsr1', NULL, NULL, false, 'starrymon ovd', NULL);
+INSERT INTO public.star VALUES (6, 'staryw sbsr1', NULL, NULL, false, 'starrymon vd', NULL);
 
 
 --
@@ -375,7 +376,7 @@ SELECT pg_catalog.setval('public.planet_id_seq', 1, true);
 -- Name: star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_id_seq', 1, false);
+SELECT pg_catalog.setval('public.star_id_seq', 1, true);
 
 
 --
@@ -456,6 +457,14 @@ ALTER TABLE ONLY public.star
 
 ALTER TABLE ONLY public.star
     ADD CONSTRAINT star_star_id_pkey PRIMARY KEY (star_id);
+
+
+--
+-- Name: star fk_galaxy_id; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT fk_galaxy_id FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
 
 
 --
